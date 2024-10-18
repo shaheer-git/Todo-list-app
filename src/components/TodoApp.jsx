@@ -4,6 +4,7 @@ const TodoApp = () => {
     const [tasks, setTasks] = useState([]);
     const [newTask, setNewTask] = useState('');
     const [filter, setFilter] = useState('all');
+    const [isAscending, setIsAscending] = useState(true);
 
     useEffect(() => {
         fetch('https://run.mocky.io/v3/cb74646f-0bf9-4ba8-a167-d652a413c74b')
@@ -43,8 +44,11 @@ const TodoApp = () => {
     const completedCount = tasks.filter(task => task.completed).length;
 
     const sortList = () => {
-        const updated = [...tasks].sort((a, b) => a.task.localeCompare(b.task));
+        const updated = [...tasks].sort((a, b) => {
+            return isAscending ? a.task.localeCompare(b.task) : b.task.localeCompare(a.task);
+        });
         setTasks(updated);
+        setIsAscending(!isAscending);
     }
 
     return (
