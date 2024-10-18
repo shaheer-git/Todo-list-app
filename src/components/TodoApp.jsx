@@ -42,6 +42,11 @@ const TodoApp = () => {
     const taskCount = tasks.length;
     const completedCount = tasks.filter(task => task.completed).length;
 
+    const sortList = () => {
+        const updated = [...tasks].sort((a, b) => a.task.localeCompare(b.task));
+        setTasks(updated);
+    }
+
     return (
         <div className="min-h-screen bg-gray-100 p-4">
             <h1 className="text-3xl font-bold text-center mb-6">To-Do List</h1>
@@ -73,6 +78,14 @@ const TodoApp = () => {
                             <option value="pending" className='font-medium'>Pending</option>
                             <option value="completed" className='font-medium'>Completed</option>
                         </select>
+                    </div>
+
+                    <div>
+                        <button
+                            onClick={sortList}
+                            className="bg-[#5DA1E4] hover:bg-[#BFDBF7] cursor-pointer text-white px-4 py-2 rounded-r">
+                            Sort
+                        </button>
                     </div>
                 </div>
 
